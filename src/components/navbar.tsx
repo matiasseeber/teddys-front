@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { TokenContext } from '../App';
 import LoginModal from './loginModal';
+import { useNavigate } from 'react-router-dom';
 
 const pages = [
     {
@@ -35,6 +36,7 @@ function NavBar() {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const { token, setToken } = useContext(TokenContext);
+    const navigate = useNavigate();
 
     const logged = token !== "";
 
@@ -66,6 +68,7 @@ function NavBar() {
     const handleLogoutClick = () => {
         setToken("");
         handleCloseUserMenu();
+        navigate("/");
     };
 
     const handleModalClose = () => {

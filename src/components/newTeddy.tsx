@@ -12,7 +12,6 @@ import Slider from './slider';
 import colors from '../resources/colors';
 import { useNavigate } from 'react-router-dom';
 
-
 interface Animal {
     id: string;
     image_url: string;
