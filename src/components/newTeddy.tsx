@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, useContext } from 'react';
-import { Typography, Container, Link } from '@mui/material';
+import { Typography, Container, Link, Snackbar, Alert } from '@mui/material';
 import { MuiColorInput } from 'mui-color-input'
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -44,6 +44,20 @@ const NewTeddy: FC = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const [windowWidth, setWindowWidth] = useState(window.outerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.outerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const handleChange = (newValue: string) => {
         setHex(newValue)
@@ -76,7 +90,7 @@ const NewTeddy: FC = () => {
     };
 
     const saveUserTeddy = async () => {
-        if(message != "") return;
+        if (message != "") return;
 
         const payload: UserTeddyPayload = {
             accessory_id: selectedAccessory!.id,
@@ -104,8 +118,10 @@ const NewTeddy: FC = () => {
                 Seleccionar Animal, Accesorio y Color
             </Typography>
 
-            <Slider items={animals} onChange={handleAnimalChange} text='Seleccionar un animal' />
-            <Slider items={accessories} onChange={handleAccessoryChange} text='Seleccionar un animal' />
+            <div style={{ width: "100%", display: "flex", flexDirection: windowWidth > 850 ? "row" : "column" }}>
+                <Slider width={windowWidth > 850 ? "50%" : "100%"} items={animals} onChange={handleAnimalChange} text='Seleccionar un animal' />
+                <Slider width={windowWidth > 850 ? "50%" : "100%"} items={accessories} onChange={handleAccessoryChange} text='Seleccionar un animal' />
+            </div>
             <div style={{ width: "100%" }}>
                 <MuiColorInput format='hex8' value={hex} onChange={handleChange} />
             </div>
@@ -132,10 +148,20 @@ const NewTeddy: FC = () => {
                     </Link>
                 </div>
                 {
-                    message != "" && <p style={{ color: "green", marginTop: "5px", width: "100%", textAlign: "center" }}>{message}</p>
+                    message != "" && 
+                    <Snackbar open={true} autoHideDuration={6000}>
+                        <Alert severity="success" sx={{ width: '100%' }}>
+                            {message}
+                        </Alert>
+                    </Snackbar>
                 }
                 {
-                    error != "" && <p style={{ color: "red", marginTop: "5px", width: "100%", textAlign: "center" }}>{error}</p>
+                    error != "" && 
+                    <Snackbar open={true} autoHideDuration={6000}>
+                        <Alert severity="error" sx={{ width: '100%' }}>
+                            {error}
+                        </Alert>
+                    </Snackbar>
                 }
             </div>
         </Container>

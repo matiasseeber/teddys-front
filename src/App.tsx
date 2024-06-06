@@ -3,6 +3,7 @@ import NavBar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NewTeddy from "./components/newTeddy";
 import { createContext, useState, Dispatch, SetStateAction } from "react";
+import DataTable from "./components/DataTable";
 
 interface TokenContextType {
   token: string;
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/newTeddy" Component={NewTeddy} />
+          <Route path="/teddys" Component={DataTable} />
         </Routes>
       </Router>
     </TokenContext.Provider>

@@ -12,9 +12,9 @@ interface Item {
     description: string;
 }
 
-const Slider = ({ items, onChange, text }: { text: string ,items: Item[], onChange: (index: number) => void }) => {
+const Slider = ({ items, onChange, text, width }: { width: string, text: string ,items: Item[], onChange: (index: number) => void }) => {
     return (
-        <Box my={4} width={"50%"}>
+        <Box my={4} width={width}>
             <Typography variant="h6" gutterBottom textAlign={"center"}>
                 {text}
             </Typography>

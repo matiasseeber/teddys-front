@@ -16,6 +16,14 @@ const endpoints = {
     createTeddy: {
         method: "post",
         url: base_url + "/teddys"
+    },
+    userTeddys: {
+        method: "get",
+        url: base_url + "/teddys"
+    },
+    deleteTeddy: {
+        method: "delete",
+        url: base_url + "/teddys/"
     }
 }
 
