@@ -66,7 +66,7 @@ export const HomePage = () => {
             </Table>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                 <LinkBtn backgroundColor={logged ? colors.backgroundColor : "lightGray"} title={title} disabled={!logged} text="Crear un nuevo peluche" to="newTeddy" />
-                <LinkBtn backgroundColor={logged ? colors.backgroundColor : "lightGray"} title={title} disabled={!logged} text="Ver mis peluches guardados" to="" />
+                <LinkBtn backgroundColor={logged ? colors.backgroundColor : "lightGray"} title={title} disabled={!logged} text="Ver mis peluches guardados" to="teddys" />
             </div>
         </div>
     );
